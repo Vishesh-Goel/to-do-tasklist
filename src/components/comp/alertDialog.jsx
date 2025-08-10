@@ -11,34 +11,28 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 
-const handleDelete = (list, setList, titem, n, setn) => {
-    setList(list.filter(t => t.id !== titem.id))
-    if (titem.checked === true){
-      setn(n)
-    }
-    else {
-      setn(n => n-1)
-    }
-}
 
-export function DeletionDialog( {list, setList, titem, n, setn} ) {
+
+export function DeletionDialog( {func, message, button_msg} ) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className='bg-cyan-700 font-semibold text-blue-200 hover:bg-cyan-800 transition-colors duration-300 rounded cursor-pointer h-9 px-4 py-1'>Delete</Button>
+        <Button className='font-semibold text-base bg-red-500 text-blue-200 hover:bg-red-800 transition-colors duration-300 rounded cursor-pointer h-9 px-4 py-1'>
+          {button_msg}
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className={'bg-cyan-900'}>
         <AlertDialogHeader>
           <AlertDialogTitle className={'text-cyan-500'}>Are you sure?</AlertDialogTitle>
           <AlertDialogDescription className={'text-cyan-200'}>
-            Do you want to Delete this Task?
+            {message}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction className={'bg-cyan-300 text-cyan-900 hover:bg-cyan-400 hover:text-cyan-900 transition-all duration-200'}
-                onClick={() => handleDelete(list, setList, titem, n, setn)}>Confirm
+          <AlertDialogAction className={'bg-cyan-300 text-cyan-900 hover:bg-cyan-200 hover:text-cyan-900 cursor-pointer transition-all duration-200'} onClick={func}>
+                Confirm
           </AlertDialogAction>
-          <AlertDialogCancel className={'bg-cyan-900 text-cyan-200 hover:bg-cyan-950 hover:text-cyan-200 transition-all duration-200'}>
+          <AlertDialogCancel className={'bg-cyan-900 text-cyan-200 hover:bg-cyan-950 hover:text-cyan-200 cursor-pointer transition-all duration-200'}>
                 Cancel
           </AlertDialogCancel>
         </AlertDialogFooter>
